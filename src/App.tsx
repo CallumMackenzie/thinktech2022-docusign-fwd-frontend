@@ -45,6 +45,7 @@ class Form extends React.Component<FormProps, FormState> {
 		};
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.viewData = this.viewData.bind(this);
 	}
 
 	handleChange(event: any) {
@@ -70,6 +71,7 @@ class Form extends React.Component<FormProps, FormState> {
 
 	viewData(event: any) {
 		this.setState({ requesting: true, error: "" });
+		event.preventDefault();
 		fetchVaccineData(this.state.value,
 			(result: any) => {
 				console.log(result);
@@ -119,14 +121,15 @@ class Form extends React.Component<FormProps, FormState> {
 				value={this.state.value}
 				name="passphrase"
 				onChange={this.handleChange} />
+			<br />
 			<input type="submit"
 				name="Sign Form"
 				disabled={this.state.requesting} />
 			<br />
-			<input type="button"
+			<button type="button"
 				name="View Data"
 				onClick={this.viewData}
-				disabled={this.state.requesting} />
+				disabled={this.state.requesting}>View Data</button>
 			<p>{this.state.error}</p>
 			<br />
 			<LoadingIndicator requesting={this.state.requesting} />
