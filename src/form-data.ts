@@ -6,7 +6,7 @@ export interface FormURL {
 };
 
 export const fetchFormLink = async (passphrase: string,
-	callback: (result: FormURL | number) => void) => {
+	callback: (result: any) => void) => {
 	let res = await axios.post("https://eslsmijhge.execute-api.us-east-2.amazonaws.com/proto/embedded",
 		{
 			token: passphrase
@@ -16,7 +16,8 @@ export const fetchFormLink = async (passphrase: string,
 			else
 				callback(e.response);
 		});
-	console.log(res);
+	if (res !== undefined)
+		callback(res);
 };
 
 // export enum NonEmployeeOrContractType {

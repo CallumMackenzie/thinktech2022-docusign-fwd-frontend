@@ -58,15 +58,15 @@ class Form extends React.Component<FormProps, FormState> {
 		fetchFormLink(this.state.value,
 			(result: any) => {
 				console.log(result);
-				this.setState({ requesting: false });
 				console.log("no longer requesting");
 				if (result == 401)
 					this.setState({ error: "Incorrect passphrase" })
 				else if (result == 502)
 					this.setState({ error: "Request error" })
 				else {
-					console.log("NurseURL" + result.data.url.nurseURL)
-					window.location.href = result.data.url.nurseURL;
+					this.setState({ error: "Redirecting ... " })
+					console.log("URL: " + result.data.url)
+					window.location.href = result.data.url;
 				}
 			});
 	}
@@ -90,6 +90,7 @@ class Form extends React.Component<FormProps, FormState> {
 				disabled={this.state.requesting} />
 			<br />
 			<p>{this.state.error}</p>
+			<br />
 			<LoadingIndicator requesting={this.state.requesting} />
 		</form>
 		);
