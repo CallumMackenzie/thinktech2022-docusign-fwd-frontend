@@ -1,7 +1,7 @@
 {
 	"name": "thinktech2022-docusign-fwd-frontend",
 	"version": "0.1.0",
-	"homepage": "https://github.com/CallumMackenzie/thinktech2022-docusign-fwd-frontend.git",
+	"homepage": "https://CallumMackenzie.github.io/thinktech2022-docusign-fwd-frontend",
 	"private": true,
 	"dependencies": {
 		"@testing-library/jest-dom": "^5.16.5",
