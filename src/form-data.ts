@@ -11,8 +11,10 @@ export const fetchFormLink = async (passphrase: string,
 		{
 			token: passphrase
 		}).catch(e => {
-			if (e.response?.status == 401)
-				callback(401);
+			if (e.response?.status != 200)
+				callback(e.response?.status);
+			else
+				callback(e.response);
 		});
 	console.log(res);
 };

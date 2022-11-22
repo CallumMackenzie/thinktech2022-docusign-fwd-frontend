@@ -2,7 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { Blocks } from 'react-loader-spinner';
-import { fetchFormLink } from './form-data';
+import { fetchFormLink, FormURL } from './form-data';
 import { JsxElement } from 'typescript';
 
 function App() {
@@ -14,7 +14,8 @@ function App() {
 interface FormProps { }
 interface FormState {
 	value: string,
-	requesting: boolean
+	requesting: boolean,
+	error: string
 }
 
 
@@ -40,7 +41,8 @@ class Form extends React.Component<FormProps, FormState> {
 		super(props);
 		this.state = {
 			value: "",
-			requesting: false
+			requesting: false,
+			error: ""
 		};
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -56,6 +58,13 @@ class Form extends React.Component<FormProps, FormState> {
 		fetchFormLink(this.state.value,
 			(result: any) => {
 				console.log(result);
+				if (result == 401)
+					this.setState({ error: "Incorrect passphrase" })
+				else if (result == 502)
+					this.setState({ error: "Request error" })
+				else {
+					window.location.replace(result.data.url.nurseURL);
+				}
 				this.setState({ requesting: false });
 			});
 	}
@@ -67,8 +76,8 @@ class Form extends React.Component<FormProps, FormState> {
 			padding: "5%"
 		}}
 			onSubmit={this.handleSubmit}>
-			<text>Passphrase:</text>
-			<br/>
+			<p>Passphrase:</p>
+			<br />
 			<input type="text"
 				disabled={this.state.requesting}
 				value={this.state.value}
@@ -77,6 +86,8 @@ class Form extends React.Component<FormProps, FormState> {
 			<input type="submit"
 				name="submit"
 				disabled={this.state.requesting} />
+			<br />
+			<p>{this.state.error}</p>
 			<LoadingIndicator requesting={this.state.requesting} />
 		</form>
 		);
