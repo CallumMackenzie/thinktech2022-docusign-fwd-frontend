@@ -2,9 +2,8 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { Blocks } from 'react-loader-spinner';
-import { VaccinationData } from './vaccination-data';
+import { fetchFormLink } from './form-data';
 import { JsxElement } from 'typescript';
-import { fetchVaccinationData } from './vaccination-data';
 
 function App() {
 	return (<div className="App">
@@ -54,8 +53,9 @@ class Form extends React.Component<FormProps, FormState> {
 	handleSubmit(event: any) {
 		event.preventDefault();
 		this.setState({ requesting: true })
-		fetchVaccinationData(this.state.value,
-			(result: VaccinationData[]) => {
+		fetchFormLink(this.state.value,
+			(result: any) => {
+				console.log(result);
 				this.setState({ requesting: false });
 			});
 	}
