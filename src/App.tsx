@@ -1,9 +1,7 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { Blocks } from 'react-loader-spinner';
-import { fetchFormLink, FormURL } from './form-data';
-import { JsxElement } from 'typescript';
+import { fetchFormLink, fetchVaccineData, FormURL } from './form-data';
 
 function App() {
 	return (<div className="App">
@@ -15,9 +13,9 @@ interface FormProps { }
 interface FormState {
 	value: string,
 	requesting: boolean,
-	error: string
+	error: string,
+	vaccinationData: any
 }
-
 
 interface LoaderProps {
 	requesting: boolean
@@ -42,7 +40,8 @@ class Form extends React.Component<FormProps, FormState> {
 		this.state = {
 			value: "",
 			requesting: false,
-			error: ""
+			error: "",
+			vaccinationData: undefined
 		};
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -52,33 +51,57 @@ class Form extends React.Component<FormProps, FormState> {
 		this.setState({ value: event.target.value });
 	}
 
+	private errorResult(result: any): boolean {
+		if (result == 401) {
+			this.setState({
+				error: "Incorrect passphrase",
+				requesting: false
+			});
+			return true;
+		} else if (result == 502 || result == 500) {
+			this.setState({
+				error: "Request error",
+				requesting: false
+			});
+			return true;
+		}
+		return false;
+	}
+
+	viewData(event: any) {
+		this.setState({ requesting: true, error: "" });
+		fetchVaccineData(this.state.value,
+			(result: any) => {
+				console.log(result);
+				if (this.errorResult(result)) return;
+				if (result.data.items !== undefined)
+					this.setState({
+						requesting: false,
+						error: "Vaccination data fetched",
+						vaccinationData: result.data.items
+					});
+				else this.setState({
+					requesting: false,
+					error: "Unknown error"
+				});
+			});
+	}
+
 	handleSubmit(event: any) {
 		event.preventDefault();
-		this.setState({ requesting: true, error: "" })
+		this.setState({ requesting: true, error: "" });
 		fetchFormLink(this.state.value,
 			(result: any) => {
 				console.log(result);
-				console.log("no longer requesting");
-				if (result == 401) {
-					this.setState({
-						error: "Incorrect passphrase",
-						requesting: false
-					});
-				} else if (result == 502 || result == 500) {
-					this.setState({
-						error: "Request error",
-						requesting: false
-					});
-				} else if (result.data.url !== undefined) {
+				if (this.errorResult(result)) return;
+				if (result.data.url !== undefined) {
 					this.setState({ error: "Redirecting ... " });
 					console.log("URL: " + result.data.url);
 					window.location.href = result.data.url;
-				} else {
-					this.setState({
-						error: "Unknown error",
-						requesting: false
-					});
-				}
+				} else this.setState({
+					error: "Unknown error",
+					requesting: false
+				});
 			});
 	}
 
@@ -97,9 +120,13 @@ class Form extends React.Component<FormProps, FormState> {
 				name="passphrase"
 				onChange={this.handleChange} />
 			<input type="submit"
-				name="submit"
+				name="Sign Form"
 				disabled={this.state.requesting} />
 			<br />
+			<input type="button"
+				name="View Data"
+				onClick={this.viewData}
+				disabled={this.state.requesting} />
 			<p>{this.state.error}</p>
 			<br />
 			<LoadingIndicator requesting={this.state.requesting} />
