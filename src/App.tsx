@@ -44,7 +44,7 @@ class Form extends React.Component<FormProps, FormState> {
 			vaccinationData: undefined
 		};
 		this.handleChange = this.handleChange.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
+		this.onRequestVaccinationForm = this.onRequestVaccinationForm.bind(this);
 		this.viewData = this.viewData.bind(this);
 	}
 
@@ -89,7 +89,7 @@ class Form extends React.Component<FormProps, FormState> {
 			});
 	}
 
-	handleSubmit(event: any) {
+	onRequestVaccinationForm(event: any) {
 		event.preventDefault();
 		this.setState({ requesting: true, error: "" });
 		fetchFormLink(this.state.value,
@@ -112,8 +112,7 @@ class Form extends React.Component<FormProps, FormState> {
 			justifyContent: "center",
 			alignItems: "center",
 			padding: "5%"
-		}}
-			onSubmit={this.handleSubmit}>
+		}}>
 			<p>Passphrase:</p>
 			<br />
 			<input type="text"
@@ -124,7 +123,8 @@ class Form extends React.Component<FormProps, FormState> {
 			<br />
 			<button type="button"
 				name="Sign Vaccination Form"
-				disabled={this.state.requesting} />
+				onClick={this.onRequestVaccinationForm}
+				disabled={this.state.requesting}>Sign Vaccination Form</button>
 			<br />
 			<button type="button"
 				name="View Data"
