@@ -59,11 +59,17 @@ class Form extends React.Component<FormProps, FormState> {
 			(result: any) => {
 				console.log(result);
 				console.log("no longer requesting");
-				if (result == 401)
-					this.setState({ error: "Incorrect passphrase" })
-				else if (result == 502)
-					this.setState({ error: "Request error" })
-				else {
+				if (result == 401) {
+					this.setState({
+						error: "Incorrect passphrase",
+						requesting: false
+					})
+				} else if (result == 502 || result == 500) {
+					this.setState({
+						error: "Request error",
+						requesting: false
+					})
+				} else {
 					this.setState({ error: "Redirecting ... " })
 					console.log("URL: " + result.data.url)
 					window.location.href = result.data.url;
