@@ -122,8 +122,8 @@ class Form extends React.Component<FormProps, FormState> {
 				name="passphrase"
 				onChange={this.handleChange} />
 			<br />
-			<input type="submit"
-				name="Sign Form"
+			<button type="button"
+				name="Sign Vaccination Form"
 				disabled={this.state.requesting} />
 			<br />
 			<button type="button"
