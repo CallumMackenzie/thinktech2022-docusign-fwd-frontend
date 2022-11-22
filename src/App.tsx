@@ -134,9 +134,9 @@ class Form extends React.Component<FormProps, FormState> {
 			<ul>
 				{(this.state.vaccinationData === undefined ? [] :
 					this.state.vaccinationData).map((item: any) =>
-					(<p>{item.firstName + " " + item.lastName
+					(<p>{item.firstName.S + " " + item.lastName.S
 						+ " vaccinated on "
-						+ item.dateSigned}</p>))}
+						+ item.dateSigned.S}</p>))}
 			</ul>
 			<br />
 			<LoadingIndicator requesting={this.state.requesting} />
