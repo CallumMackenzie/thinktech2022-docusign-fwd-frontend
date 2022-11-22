@@ -63,16 +63,21 @@ class Form extends React.Component<FormProps, FormState> {
 					this.setState({
 						error: "Incorrect passphrase",
 						requesting: false
-					})
+					});
 				} else if (result == 502 || result == 500) {
 					this.setState({
 						error: "Request error",
 						requesting: false
-					})
-				} else {
-					this.setState({ error: "Redirecting ... " })
-					console.log("URL: " + result.data.url)
+					});
+				} else if (result.data.url !== undefined) {
+					this.setState({ error: "Redirecting ... " });
+					console.log("URL: " + result.data.url);
 					window.location.href = result.data.url;
+				} else {
+					this.setState({
+						error: "Unknown error",
+						requesting: false
+					});
 				}
 			});
 	}
