@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/CallumMackenzie/thinktech2022-site.git/static/css/main.073c9b0a.css",
-    "main.js": "/CallumMackenzie/thinktech2022-site.git/static/js/main.5ae4a753.js",
-    "static/js/787.3f6f2318.chunk.js": "/CallumMackenzie/thinktech2022-site.git/static/js/787.3f6f2318.chunk.js",
-    "index.html": "/CallumMackenzie/thinktech2022-site.git/index.html",
-    "main.073c9b0a.css.map": "/CallumMackenzie/thinktech2022-site.git/static/css/main.073c9b0a.css.map",
-    "main.5ae4a753.js.map": "/CallumMackenzie/thinktech2022-site.git/static/js/main.5ae4a753.js.map",
-    "787.3f6f2318.chunk.js.map": "/CallumMackenzie/thinktech2022-site.git/static/js/787.3f6f2318.chunk.js.map"
+    "main.css": "/CallumMackenzie/thinktech2022-docusign-fwd-frontend.git/static/css/main.073c9b0a.css",
+    "main.js": "/CallumMackenzie/thinktech2022-docusign-fwd-frontend.git/static/js/main.f6a88c1c.js",
+    "static/js/787.3f6f2318.chunk.js": "/CallumMackenzie/thinktech2022-docusign-fwd-frontend.git/static/js/787.3f6f2318.chunk.js",
+    "index.html": "/CallumMackenzie/thinktech2022-docusign-fwd-frontend.git/index.html",
+    "main.073c9b0a.css.map": "/CallumMackenzie/thinktech2022-docusign-fwd-frontend.git/static/css/main.073c9b0a.css.map",
+    "main.f6a88c1c.js.map": "/CallumMackenzie/thinktech2022-docusign-fwd-frontend.git/static/js/main.f6a88c1c.js.map",
+    "787.3f6f2318.chunk.js.map": "/CallumMackenzie/thinktech2022-docusign-fwd-frontend.git/static/js/787.3f6f2318.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.073c9b0a.css",
-    "static/js/main.5ae4a753.js"
+    "static/js/main.f6a88c1c.js"
   ]
 }
