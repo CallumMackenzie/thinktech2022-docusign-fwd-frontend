@@ -58,14 +58,16 @@ class Form extends React.Component<FormProps, FormState> {
 		fetchFormLink(this.state.value,
 			(result: any) => {
 				console.log(result);
+				this.setState({ requesting: false });
+				console.log("no longer requesting");
 				if (result == 401)
 					this.setState({ error: "Incorrect passphrase" })
 				else if (result == 502)
 					this.setState({ error: "Request error" })
 				else {
-					window.location.replace(result.data.url.nurseURL);
+					console.log("NurseURL" + result.data.url.nurseURL)
+					window.location.href = result.data.url.nurseURL;
 				}
-				this.setState({ requesting: false });
 			});
 	}
 
