@@ -54,7 +54,7 @@ class Form extends React.Component<FormProps, FormState> {
 
 	handleSubmit(event: any) {
 		event.preventDefault();
-		this.setState({ requesting: true })
+		this.setState({ requesting: true, error: "" })
 		fetchFormLink(this.state.value,
 			(result: any) => {
 				console.log(result);
