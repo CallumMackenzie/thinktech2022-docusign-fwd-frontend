@@ -131,6 +131,13 @@ class Form extends React.Component<FormProps, FormState> {
 				onClick={this.viewData}
 				disabled={this.state.requesting}>View Data</button>
 			<p>{this.state.error}</p>
+			<ul>
+				{(this.state.vaccinationData === undefined ? [] :
+					this.state.vaccinationData).map((item: any) =>
+					(<p>{item.firstName + " " + item.lastName
+						+ " vaccinated on "
+						+ item.dateSigned}</p>))}
+			</ul>
 			<br />
 			<LoadingIndicator requesting={this.state.requesting} />
 		</form>
